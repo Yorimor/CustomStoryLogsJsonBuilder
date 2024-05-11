@@ -2,7 +2,7 @@
 
 https://yorimor.github.io/CustomStoryLogsJsonBuilder/
 
----
+
 
 Use [this page](https://yorimor.github.io/CustomStoryLogsJsonBuilder/) to create the json files for use with my [CustomStoryLogs](https://thunderstore.io/c/lethal-company/p/Yorimor/CustomStoryLogs/) mod for lethal company.
 
