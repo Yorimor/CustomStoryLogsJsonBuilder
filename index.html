@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>One HTML Page Challenge</title>
+    <style>
+        body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: repeating-linear-gradient(0deg, #850000, #850000 5px, #9b0101 0, #9b0101 10px);
+        }
+
+        body::before {
+            position: absolute;
+            height: 100%;
+            min-height: 100vh;
+            width: 100%;
+            min-width: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, .6) 0%, rgba(0, 0, 0, 0) 100%);
+            pointer-events: none;
+            content: '';
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: transparent;
+            padding: 4rem 0;
+        }
+
+        header h1 {
+            text-align: center;
+            width: fit-content;
+            color: white;
+            line-height: 1.2;
+            transform: matrix3d(1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    -0.00075,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1);
+        }
+
+        header h1 b {
+            text-transform: uppercase;
+        }
+
+        header h1::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            border: 3px solid white;
+            width: 100%;
+            height: 100%;
+            padding: .5rem .5rem .4rem;
+            content: '';
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            width: calc(100% - 30px);
+        }
+
+        h2 {
+            color: white;
+            text-transform: uppercase;
+            align-self: flex-start;
+            margin: 0 0 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            position: relative;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        hr {
+            border: none;
+            border-bottom: 2px solid white;
+            margin: 1rem 0 2rem;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        #mod-info,
+        .log-item {
+            margin-bottom: 2rem;
+            border: 2px solid white;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #exported {
+            margin-bottom: 2rem;
+            border: 2px solid white;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        #entries {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .log-item {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .block {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .block:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .block label,
+        span {
+            width: 100%;
+            text-align: left;
+            color: white;
+            margin-bottom: .25rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        span {
+            display: block;
+            width: 100%;
+            line-height: 1.2;
+            margin: 0 1rem .5rem 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        input,
+        textarea {
+            display: block;
+            padding: .25rem 1rem;
+            width: 100%;
+            background: white;
+            appearance: none;
+            border: 2px solid white;
+            border-radius: 0;
+            color: black;
+            transition: .3s;
+            resize: none;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+        }
+
+        input[type="number"]:last-of-type {
+            margin-right: none;
+        }
+
+        .row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .col {
+            width: 100%;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .third {
+            width: calc(100% / 3);
+            padding: 0 0.5rem;
+        }
+
+        .third:last-of-type {
+            padding: 0 0 0 .5rem;
+        }
+
+        .third:first-of-type {
+            padding: 0 .5rem 0 0;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none !important;
+            border: 2px solid orange;
+            box-shadow: 0 0 8px orange;
+        }
+
+        .log-item:first-child>button {
+            display: none;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        button {
+            display: block;
+            appearance: none;
+            border: 2px solid white;
+            border-radius: 0;
+            text-transform: uppercase;
+            color: white;
+            cursor: pointer;
+            padding: .25rem .5rem;
+            text-align: center;
+            font-size: 14px;
+            transition: 0.3s;
+            background: linear-gradient(90deg, #fff 50%, transparent 50%);
+            background-size: 200% 100%;
+            background-position: 100% 0%;
+            width: fit-content;
+            align-self: flex-end;
+            font-weight: bold;
+            margin: 0 0 0 1rem;
+        }
+
+        button:last-of-type {
+            margin-right: 0;
+        }
+
+        button:hover {
+            color: #640606;
+            background-position: 0% 0%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>CustomStoryLogs<br><b>Log Builder v1</b></h1>
+    </header>
+
+    <main>
+        <div id="mod-info">
+            <h2>Mod Data</h2>
+            <div class="block">
+                <label for="username">Username</label><input data-name="username" id="username" type="text"
+                    placeholder="Yorimor"></input>
+            </div>
+            <div class="block">
+                <label for="modname">Mod Name</label><input data-name="modname" id="modname" type="text"
+                    placeholder="ModName"></input>
+            </div>
+            <div class="block">
+                <label for="version">Mod Version</label><input data-name="version" id="version"
+                    placeholder="1.0.0"></input>
+            </div>
+        </div>
+        <hr>
+        <div id="entries">
+            <div class="log-item">
+                <h2>Log Data</h2>
+                <div class="block">
+                    <label>Log Name</label>
+                    <input data-name="name" type="text"></input>
+                </div>
+
+                <div class="block">
+                    <label>Log Text</label>
+                    <textarea rows="10" data-name="text"></textarea>
+                </div>
+
+                <div class="block">
+                    <label>Moon</label>
+                    <input placeholder="71 Gordion" type="text" data-name="moon"></input>
+                </div>
+
+                <div class="block">
+                    <label>Log Location</label>
+
+                    <div class="row">
+
+                        <div class="third">
+                            <span>X</span>
+                            <input placeholder="0.000" step="0.001" id="pos" type="number" data-name="X">
+                        </div>
+
+                        <div class="third">
+                            <span>Y</span>
+                            <input placeholder="0.000" step="0.001" id="pos" type="number" data-name="Y">
+                        </div>
+
+                        <div class="third">
+                            <span>Z</span>
+                            <input placeholder="0.000" step="0.001" id="pos" type="number" data-name="Z">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="block">
+                    <label>Log Rotation</label>
+                    <div class="row">
+
+                        <div class="third">
+                            <span>X</span>
+                            <input placeholder="0.000" step="0.001" id="rot" type="number" data-name="X">
+                        </div>
+
+                        <div class="third">
+                            <span>Y</span>
+                            <input placeholder="0.000" step="0.001" id="rot" type="number" data-name="Y">
+                        </div>
+
+                        <div class="third">
+                            <span>Z</span>
+                            <input placeholder="0.000" step="0.001" id="rot" type="number" data-name="Z">
+                        </div>
+
+                    </div>
+                </div>
+
+                <button onclick="removeLog(this)">Remove Log</button>
+            </div>
+
+        </div>
+        </div>
+        </div>
+        <div class="buttons">
+            <button id="add-log" onclick="addLog()">Add Log</button>
+            <button id="add-log" onclick="exportLogs()">Export Logs</button>
+        </div>
+        <hr>
+
+        <div class="exportArea">
+            <div class="buttons">
+                <button onclick="copyText()">Copy Text</button>
+            </div>
+            <pre id="exported"></pre>
+        </div>
+        <br />
+    </main>
+    <script>
+        const modInfo = document.querySelector('#mod-info');
+
+        const baseFields = modInfo.querySelectorAll('#username, #modname, #version');
+
+        const entries = document.querySelector("#entries");
+
+        const exported = document.querySelector("#exported");
+
+        const newLog = document.querySelector(".log-item").cloneNode(true);
+        function addLog() {
+            entries.appendChild(newLog.cloneNode(true));
+        }
+
+        function removeLog(btn) {
+            if (entries.childElementCount > 1) {
+                btn.parentElement.remove();
+            }
+        }
+
+        let requiredError = (element) => {
+            element.style.background = 'orange';
+            window.scrollTo({
+                top: element.getBoundingClientRect().top + window.scrollY - 30,
+                behavior: "smooth",
+            });
+            setTimeout(() => {
+                element.style.background = '';
+            }, 1500);
+            return false;
+        }
+
+        function exportLogs() {
+            let data = {};
+
+            for (let i = 0; i < baseFields.length; i++) {
+                if (baseFields[i].value) {
+                    Object.assign(data, { [baseFields[i].dataset.name]: baseFields[i].value });
+                } else {
+                    return requiredError(baseFields[i]);
+                }
+            }
+
+            let logs = {};
+            let allLogs = entries.querySelectorAll('.log-item');
+            for (let i = 0; i < allLogs.length; i++) {
+                let logObj = {};
+                let textInputs = allLogs[i].querySelectorAll('input[type="text"], textarea');
+                for (let n = 0; n < textInputs.length; n++) {
+                    if (textInputs[n].value) {
+                        Object.assign(logObj, {
+                            [textInputs[n].dataset.name]: textInputs[n].value
+                        });
+                    } else {
+                        return requiredError(textInputs[n]);
+                    }
+                }
+
+                let vecInputs = allLogs[i].querySelectorAll('input#pos');
+                let vec3 = {};
+                for (let n = 0; n < vecInputs.length; n++) {
+                    if (vecInputs[n].value) {
+                        Object.assign(vec3, {
+                            [vecInputs[n].dataset.name]: vecInputs[n].value
+                        });
+                    } else {
+                        return requiredError(vecInputs[n]);
+                    }
+                }
+                Object.assign(logObj, { position: vec3 });
+
+                vecInputs = allLogs[i].querySelectorAll('input#rot');
+                vec3 = {};
+                for (let n = 0; n < vecInputs.length; n++) {
+                    if (vecInputs[n].value) {
+                        Object.assign(vec3, {
+                            [vecInputs[n].dataset.name]: vecInputs[n].value
+                        });
+                    } else {
+                        return requiredError(vecInputs[n]);
+                    }
+                }
+                Object.assign(logObj, { rotation: vec3 });
+
+                Object.assign(logs, { [i]: logObj });
+            }
+
+            Object.assign(data, { logs: logs });
+
+            exported.innerText = JSON.stringify(data, null, 4);
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+            });
+        }
+
+        function copyText() {
+            navigator.clipboard.writeText(exported.innerText);
+            alert("Copied to your clipboard");
+        }
+
+    </script>
+</body>
+
+</html>
