@@ -262,6 +262,10 @@
             color: #640606;
             background-position: 0% 0%;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -294,65 +298,50 @@
                     <label>Log Name</label>
                     <input data-name="name" type="text"></input>
                 </div>
-
                 <div class="block">
                     <label>Log Text</label>
                     <textarea rows="10" data-name="text"></textarea>
                 </div>
-
                 <div class="block">
                     <label>Moon</label>
                     <input placeholder="71 Gordion" type="text" data-name="moon"></input>
                 </div>
-
                 <div class="block">
                     <label>Log Location</label>
-
                     <div class="row">
-
                         <div class="third">
                             <span>X</span>
                             <input placeholder="0.000" step="0.001" id="pos" type="number" data-name="X">
                         </div>
-
                         <div class="third">
                             <span>Y</span>
                             <input placeholder="0.000" step="0.001" id="pos" type="number" data-name="Y">
                         </div>
-
                         <div class="third">
                             <span>Z</span>
                             <input placeholder="0.000" step="0.001" id="pos" type="number" data-name="Z">
                         </div>
                     </div>
-
                 </div>
-
                 <div class="block">
                     <label>Log Rotation</label>
                     <div class="row">
-
                         <div class="third">
                             <span>X</span>
                             <input placeholder="0.000" step="0.001" id="rot" type="number" data-name="X">
                         </div>
-
                         <div class="third">
                             <span>Y</span>
                             <input placeholder="0.000" step="0.001" id="rot" type="number" data-name="Y">
                         </div>
-
                         <div class="third">
                             <span>Z</span>
                             <input placeholder="0.000" step="0.001" id="rot" type="number" data-name="Z">
                         </div>
-
                     </div>
                 </div>
-
                 <button onclick="removeLog(this)">Remove Log</button>
             </div>
-
         </div>
         </div>
         </div>
@@ -360,13 +349,11 @@
             <button id="add-log" onclick="addLog()">Add Log</button>
             <button id="add-log" onclick="exportLogs()">Export Logs</button>
         </div>
-        <hr>
-
-        <div class="exportArea">
-            <div class="buttons">
-                <button onclick="copyText()">Copy Text</button>
-            </div>
+        <div id="export-area" class="exportArea hidden">
             <pre id="exported"></pre>
+            <div class="buttons">
+                <button id="copy-text" onclick="copyText()">Copy Text</button>
+            </div>
         </div>
         <br />
     </main>
@@ -378,6 +365,7 @@
         const entries = document.querySelector("#entries");
 
         const exported = document.querySelector("#exported");
+        const exportArea = document.querySelector("#export-area");
 
         const newLog = document.querySelector(".log-item").cloneNode(true);
         function addLog() {
@@ -412,6 +400,8 @@
                     return requiredError(baseFields[i]);
                 }
             }
+            
+            exportArea.classList.remove("hidden");
 
             let logs = {};
             let allLogs = entries.querySelectorAll('.log-item');
@@ -470,8 +460,6 @@
             navigator.clipboard.writeText(exported.innerText);
             alert("Copied to your clipboard");
         }
-
     </script>
 </body>
-
 </html>
